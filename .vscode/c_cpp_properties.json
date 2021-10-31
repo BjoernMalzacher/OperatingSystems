@@ -1,0 +1,23 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "D:\\Programieren\\VSCRepositories\\OperatingSystems\\U1\\p1\\testlib",
+                "${workspaceFolder}/U1/p1/testlib"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "windowsSdkVersion": "10.0.19041.0",
+            "compilerPath": "D:/Programieren/Visual Studio/Visual Studio IDE/VC/Tools/MSVC/14.29.30037/bin/Hostx64/x86/cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-msvc-x64"
+        }
+    ],
+    "version": 4
+}
