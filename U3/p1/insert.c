@@ -22,26 +22,34 @@ void insert_tut(int *a, size_t *length, int z)
 void insert(int **array, size_t *length, size_t *capacity, int z)
 {
 	int *p = *array;
+	if(*length>=*capacity) { 
+
+		int *newArray = (int *)malloc((*capacity+10));
+		memmove(newArray,p,sizeof(*p));
+		
+
+	*capacity+=10;
+	p=newArray;
 	
 	
-	
-	int extracap = 0;
-	if(length+1 >=capacity){ extracap +=10;}
-	
-	int *newArray = (int *)malloc(sizeof(*p)+extracap);
-	memmove(p,array,sizeof(*p));
-	int num = 0;
-	while ((array)[num++] != NULL);
-	while ((p< num) || (*p<z))
-	{
-		memmove(p+1, p, ((p+num) - p) * sizeof(int));
 	}
 	
-	
+	for (size_t i = 0; i <*length; i++)
+	{
+		if(*(p)> z){
+			memmove(p+1,p,*length-i);
+			*(p) = z;
+			*length+=1;
+			break;
+		}
+		p++;
+	}
+	**array = *p;
 	
 
-	printf("%li %li\n ", sizeof(*newArray), sizeof(*p));
 	
+	
+		
 	
 
 	(void) array; (void) length; (void) capacity; (void) z;
