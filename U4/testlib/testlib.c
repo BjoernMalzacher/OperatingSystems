@@ -45,9 +45,11 @@ void _test_equals_int64(int64_t is, int64_t should, char* desc, char* file, int 
 void _test_equals_int(int is, int should, char* desc, char* file, int line) {
     if (is == should) {
         test_ok(desc);
+        
     } else {
         test_failed_expected("%d", should, is, desc, file, line);
     }
+    
 }
 
 void _test_equals_ptr(const void* is, const void* should, char* desc, char* file, int line) {

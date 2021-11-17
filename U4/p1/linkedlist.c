@@ -15,6 +15,7 @@ entry* allocateEntry(int value)
  */
 void freeEntry(entry *entry)
 {
+    
     free(entry);
 }
 
@@ -23,12 +24,20 @@ void freeEntry(entry *entry)
  */
 void insertValue(linkedlist *list, int value)
 {
+    if(list->head == NULL){
+       
+        entry *newValue = allocateEntry(value);
+        list->head = newValue;
+        newValue->next = newValue;
+        newValue->prev = newValue;
+    }else{
+    
     entry *current_value = list->head;
     entry *newValue = allocateEntry(value);
     newValue->prev =current_value->prev;
     list->head = newValue;
     newValue->next = current_value;
-    
+    }
     
     
     
@@ -43,11 +52,28 @@ void insertValue(linkedlist *list, int value)
  */
 entry* findFirstEntryWithValue(linkedlist *list, int value)
 {
-    (void) list;
-    (void) value;
+    entry *currentValue = list->head;
+        
+    if( currentValue->value == value){
+        return currentValue;
+    }
+    while (currentValue->next != list->head) {
+        
+        if (currentValue->value == value) {        
+            break;
+        }
+        currentValue = currentValue->next;   
+      
+    }
+    if(currentValue == list->head  ){
+        return NULL;
+    }
+    
+    
+    return currentValue;
 
-    // TODO: Add code here.
-    return NULL;
+
+
 }
 
 /*
@@ -56,16 +82,15 @@ entry* findFirstEntryWithValue(linkedlist *list, int value)
 void removeFirstEntryWithValue(linkedlist *list, int value)
 {
     
-    entry *currentValue = list->head;
-    while (currentValue->next != NULL) {
-        if (currentValue->value == value) {        
-            break;
-        }
-        currentValue = currentValue->next;
-        
-    }
+    entry *currentValue =findFirstEntryWithValue(list, value);
     
-    currentValue->prev->next = currentValue->next;
-    currentValue->next->prev = currentValue->prev;
+    if(list->head == currentValue && currentValue->next != currentValue){
+        list->head = currentValue->next;
+    }else if(list->head == currentValue && currentValue->next != currentValue){
+        list->head = NULL;
+    }
+    (currentValue->prev)->next = currentValue->next;
+    (currentValue->next)->prev = currentValue->prev;
+    
     free(currentValue);    
 }

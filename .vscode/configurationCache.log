@@ -1,0 +1,1 @@
+{"buildTargets":["all","clean","print","print-sol","run-tests","run-tests-solution","solution","test_formatstring","test_formatstring-sol"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}
