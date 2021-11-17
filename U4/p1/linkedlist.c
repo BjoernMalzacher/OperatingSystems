@@ -55,8 +55,17 @@ entry* findFirstEntryWithValue(linkedlist *list, int value)
  */
 void removeFirstEntryWithValue(linkedlist *list, int value)
 {
-    (void) list;
-    (void) value;
     
-    // TODO: Add code here.
+    entry *currentValue = list->head;
+    while (currentValue->next != NULL) {
+        if (currentValue->value == value) {        
+            break;
+        }
+        currentValue = currentValue->next;
+        
+    }
+    
+    currentValue->prev->next = currentValue->next;
+    currentValue->next->prev = currentValue->prev;
+    free(currentValue);    
 }
