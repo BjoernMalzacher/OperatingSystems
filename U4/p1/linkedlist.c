@@ -1,14 +1,13 @@
 #include "linkedlist.h"
-
+#include <stdlib.h>
 /*
  * Creates a new entry with the given value.
  */
 entry* allocateEntry(int value)
 {
-    (void) value;
-
-    // TODO: Add code here.
-    return NULL;
+    entry* p = (entry *)malloc(sizeof(entry));
+    p->value =value;
+    return p;
 }
 
 /*
@@ -16,9 +15,7 @@ entry* allocateEntry(int value)
  */
 void freeEntry(entry *entry)
 {
-    (void) entry;
-
-    // TODO: Add code here.
+    free(entry);
 }
 
 /*
@@ -26,6 +23,15 @@ void freeEntry(entry *entry)
  */
 void insertValue(linkedlist *list, int value)
 {
+    entry *current_value = list->head;
+    entry *newValue = allocateEntry(value);
+    newValue->prev =current_value->prev;
+    list->head = newValue;
+    newValue->next = current_value;
+    
+    
+    
+    
     (void) list;
     (void) value;
 
