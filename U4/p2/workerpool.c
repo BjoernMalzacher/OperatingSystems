@@ -54,28 +54,41 @@ static pthread_cond_t _cv;
 /*
  * Append new work to the ringbuffer.
  * Returns -1 on error.
- */
+//  */
 int _enqueue(WorkFunc func, int arg)
 {
+  if(_numJobs < MAX_JOBS){
+      WorkItem *newItem = (WorkItem *) malloc(sizeof(WorkItem));
+      newItem->func = func;
+      newItem->arg = arg;
+      _workItems[_numJobs+=1] = *newItem;  
+        return 0;
+  }else{
+      return -1;
+  }
+  
+  
     (void)func;
     (void)arg;
 
-    // ---> TODO: Implement <---
-
-    return -1;
+    
 }
 
 /*
  * Receives work from the ringbuffer.
  * Returns -1 if no work is available.
  */
-int _dequeue(WorkItem *item)
-{
-    (void)item;
+int _dequeue(WorkItem *item) {
+    if(_numJobs == 0){
+        return -1;
 
-    // ---> TODO: Implement <---
-
-    return -1;
+    }else{
+        *item = &_workItems[_nextJob];
+        WorkItems[_nextJob] = NULL;
+         _nextJob-=1;
+         _numJobs-=1;
+         return 0;
+    }
 }
 
 /*
