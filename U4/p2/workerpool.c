@@ -68,14 +68,7 @@ int _enqueue(WorkFunc func, int arg)
       _workItems[_lastJob].arg = arg;
       _lastJob +=1;
       _lastJob = _lastJob%MAX_JOBS;
-      
       _numJobs+=1;
-    
-    for (size_t i = 0; i < MAX_JOBS; i++)
-    {
-        printf("%p:: %i:enqueue %li\n", _workItems[i].func, _nextJob, i);
-    }
-    
         return 0;
   }else{
       return -1;
@@ -136,13 +129,12 @@ void* _workerMain(void *arg)
     // Initialize the thread local worker id variable.
     _workerId = (int)((intptr_t)arg);
     WorkItem item= _workItems[_nextJob];
-    printf("false call\n");
     if(item.func != NULL){
        item.func(item.arg); 
        while(_waitForWork(&item) != 0 ){
           
        }     
-        printf("call\n");
+        
         _dequeue(&item);
     }
     
@@ -180,7 +172,7 @@ static void _waitForWorkers(void)
     {
         
         pthread_join(*(workerpool+i), NULL);
-         printf("waiting\n");
+      
     }
     
    
