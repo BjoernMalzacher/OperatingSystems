@@ -6,6 +6,8 @@
 #include <inttypes.h>
 #include <assert.h>
 #include <unistd.h>
+#include <stdio.h>
+#include <stddef.h>
 
 /*
  * Indicates if the worker threads should exit. If done is 0 the workers
@@ -20,8 +22,11 @@ static volatile int _done = 1;
 WorkItem _workItems[MAX_JOBS];
 uint32_t _nextJob = 0;
 uint32_t _numJobs = 0;
+uint32_t _lastJob = 0;
 
-// ---> TODO: Add variables as neeed <---
+long processor_Count;
+long numberOfActiveThreads = 0; 
+pthread_t *workerpool;
 
 /*
  * The id of the current thread. The id is initialized by the workers main
@@ -54,28 +59,44 @@ static pthread_cond_t _cv;
 /*
  * Append new work to the ringbuffer.
  * Returns -1 on error.
- */
+//  */
 int _enqueue(WorkFunc func, int arg)
 {
-    (void)func;
-    (void)arg;
 
-    // ---> TODO: Implement <---
-
-    return -1;
+  if(_numJobs < MAX_JOBS){
+      _workItems[_lastJob].func = func;
+      _workItems[_lastJob].arg = arg;
+      _lastJob +=1;
+      _lastJob = _lastJob%MAX_JOBS;
+      _numJobs+=1;
+        return 0;
+  }else{
+      return -1;
+  }
 }
 
 /*
  * Receives work from the ringbuffer.
  * Returns -1 if no work is available.
  */
-int _dequeue(WorkItem *item)
-{
-    (void)item;
+int _dequeue(WorkItem *item) {
+    if(_numJobs == 0){
+        return -1;
 
-    // ---> TODO: Implement <---
-
-    return -1;
+    }else{
+        *item = _workItems[_nextJob];
+        WorkItem item;
+        item.func = NULL; 
+        item.arg = 0;
+        _workItems[_nextJob] =item;        
+         _nextJob+=1;
+         _nextJob = _nextJob%MAX_JOBS;
+         _numJobs-=1;
+         if(_numJobs == 0){
+             _nextJob = 0 ;
+         }
+         return 0;
+    }
 }
 
 /*
@@ -107,8 +128,16 @@ void* _workerMain(void *arg)
 {
     // Initialize the thread local worker id variable.
     _workerId = (int)((intptr_t)arg);
-
-    // ---> TODO: Implement fetching and execution of jobs <---
+    WorkItem item= _workItems[_nextJob];
+    if(item.func != NULL){
+       item.func(item.arg); 
+       while(_waitForWork(&item) != 0 ){
+          
+       }     
+        
+        _dequeue(&item);
+    }
+    
 
     return NULL; // Will implicitly call pthread_exit() with NULL;
 }
@@ -119,11 +148,18 @@ void* _workerMain(void *arg)
  */
 static int _startWorkers(uint32_t num)
 {
-    (void)num;
+   if((num+numberOfActiveThreads) <= processor_Count){
+        for (size_t i = 0; i < num; i++) {
+            pthread_create(&workerpool[i],NULL, _workerMain,(ptrdiff_t) i); 
+            _dequeue(&_workItems[_nextJob]);
+            numberOfActiveThreads+=num;
 
-    // ---> TODO: Implement <---
+        }
+    }else{
+        return -1;
+    }
 
-    return -1;
+    return 0;
 }
 
 /*
@@ -131,8 +167,17 @@ static int _startWorkers(uint32_t num)
  * work has been processed!
  */
 static void _waitForWorkers(void)
-{
-    // ---> TODO: Implement <---
+{   
+    for (long i = 0; i < processor_Count; i++)
+    {
+        
+        pthread_join(*(workerpool+i), NULL);
+      
+    }
+    
+   
+    
+    
 }
 
 /*
@@ -141,6 +186,7 @@ static void _waitForWorkers(void)
  */
 int initializeWorkerPool(void)
 {
+     
     assert(_done);
 
     // The main thread should not be part of the worker pool and thus does not
@@ -155,9 +201,23 @@ int initializeWorkerPool(void)
     if (pthread_cond_init(&_cv, NULL) != 0) {
         return -1;
     }
-
+ 
     uint32_t n = 4;
-    // ---> TODO: Initialize n and your variables here <---
+  
+   
+   processor_Count = sysconf(_SC_NPROCESSORS_ONLN);
+  
+    if(processor_Count < 4){
+      
+         pthread_t *t = ( pthread_t)malloc(sizeof(pthread_t)*4);
+         workerpool = t;          
+    }else{
+         pthread_t *t = ( pthread_t)malloc(sizeof(pthread_t)*processor_Count);
+         workerpool = t;
+         
+         
+    }
+
 
     // Denote the future workers that they should not exit right away, but
     // wait for work. We use a software barrier to prevent the compiler from

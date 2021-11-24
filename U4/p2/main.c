@@ -19,7 +19,9 @@ static void long_job(int arg)
 
 int main()
 {
+   
     test_start("workerpool.c");
+   
     if (initializeWorkerPool() != 0) {
         test_failed_message("Failed to initialize worker pool.")
     }
