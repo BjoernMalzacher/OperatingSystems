@@ -40,31 +40,42 @@ char *stringconcat(const char *s1, const char *s2) {
  * substrings. The caller should free the result by calling stringsplit_free().
  * Returns NULL on any error.
  */
-char **stringsplit(const char *toSplit, char delimiter)
-{
-    char** splittedArrays = malloc(stringlength(toSplit));
-    char *array;
+char **stringsplit(const char *toSplit, char delimiter) {
+    size_t count = 0;
 
-    int count = 0;
-    while (*toSplit !='\0')
-    {
-        if(*toSplit == delimiter){
-            *splittedArrays = prefix;
-            *splittedArrays +=1;
-            free(array); 
-            char *newArray;
-            array = newArray;
+    while (*(toSplit+count) !='\0') {
+        if(*(toSplit+count) == delimiter) {
+            break;
         }
-        *array = *toSplit;
-        array +=1; 
-        toSplit+=1;
-    }// doesnt work;
-     
-    (void) toSplit;
-    (void) delimiter;
+        count++;
+    }
+    if(stringlength(toSplit) == count){
+        return NULL;
+    }
+   char* firstArray= malloc(sizeof(char)*count);
 
-    // TODO: Add code here.
-    return NULL;
+   for (size_t i = 0; i < count; i++) {    
+        *firstArray = *toSplit;
+        firstArray+=1;
+        toSplit+=1;
+    }
+
+    char* secondArray= malloc(stringlength(toSplit)-(sizeof(char)*count));
+    toSplit+=1;
+    firstArray-=count;
+    char* savepinter = secondArray;
+    
+    while (*toSplit !='\0') {
+        *secondArray =*toSplit;
+        secondArray+=1; 
+        toSplit+=1;
+    }
+
+    char** splittedArrays =(char**) malloc(sizeof(char*)*2);
+    *splittedArrays = firstArray;
+    secondArray = savepinter;
+    *(splittedArrays+1)= secondArray;
+    return splittedArrays;
 }
 
 /**
@@ -72,6 +83,6 @@ char **stringsplit(const char *toSplit, char delimiter)
  */
 void stringsplit_free(char **parts)
 {
-    (void) parts;
-    // TODO: Free whatever memory you allocated in stringsplit().
+    free(parts);
 }
+    
