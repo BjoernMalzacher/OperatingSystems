@@ -1,5 +1,5 @@
 #include "mmu.h"
-
+#include <stdio.h>
 static SegmentTable *_table;
 
 // ----------------
@@ -12,9 +12,20 @@ void setSegmentTable(SegmentTable *newTable)
     flushTLB();
 }
 
-int translateSegmentTable(uint32_t *address)
-{
-    (void) address;
+int translateSegmentTable(uint32_t *address) {
+    if(_table == NULL){
+        return -1;
+    }
+
+    int i = (*address>>29);
+    uint32_t ad  = *address&0x1FFF;
+    
+    if((_table->segments[i].base<= ad) && ((_table->segments[i].length+_table->segments[i].base)> ad)){
+        //printf("%i:::%i\n", _table->segments[i].base,_table->segments[i].length);
+        *address = ad;
+        return 0;
+    }
+
     return -1;
 }
 
