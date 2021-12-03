@@ -20,8 +20,7 @@ int translateSegmentTable(uint32_t *address) {
     int i = (*address>>29);
     uint32_t ad  = *address&0x1FFF;
     
-    if((_table->segments[i].base<= ad) && ((_table->segments[i].length+_table->segments[i].base)> ad)){
-        //printf("%i:::%i\n", _table->segments[i].base,_table->segments[i].length);
+    if((_table->segments[i].base<= ad) && ((_table->segments[i].length+_table->segments[i].base)> ad)) {
         *address = ad;
         return 0;
     }
