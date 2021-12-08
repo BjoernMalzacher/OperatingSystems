@@ -1,12 +1,16 @@
 #include "memset.h"
+#include "stdio.h"
+#include "string.h"
+#include "stdlib.h"
 /**
  * Rotates a 64 bit integer by one byte (8 bit) to the right.
  */
 uint64_t rotr(uint64_t v) {
-    (void) v;
+    uint64_t save = v & 0x00000000000000FF;
+    save = save<<56;
+    v = v>>8;
 
-    // TODO
-    return 0;
+    return (v+save);
 }
 
 /**
@@ -15,11 +19,12 @@ uint64_t rotr(uint64_t v) {
  * As a result calling pattern_memset_byte again with the same pattern will continue the pattern.
  */
 void pattern_memset_byte(void *s, uint64_t *pat, size_t n) {
-    (void) s;
-    (void) pat;
-    (void) n;
+    char* buff = s;
+    for (size_t i = 0; i < n; i++) {
+        memcpy(buff+i,pat,1); 
+        *pat = rotr(*pat);
 
-    // TODO    
+    }      
 }
 
 /**
@@ -27,6 +32,10 @@ void pattern_memset_byte(void *s, uint64_t *pat, size_t n) {
  * The function should minimize the number of memory accesses.
  */
 void pattern_memset(void *s, uint64_t pat, size_t n) {
+
+
+
+
     (void) s;
     (void) pat;
     (void) n;
