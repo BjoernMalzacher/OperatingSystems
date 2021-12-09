@@ -19,9 +19,8 @@ uint64_t rotr(uint64_t v) {
  * As a result calling pattern_memset_byte again with the same pattern will continue the pattern.
  */
 void pattern_memset_byte(void *s, uint64_t *pat, size_t n) {
-    char* buff = s;
     for (size_t i = 0; i < n; i++) {
-        memcpy(buff+i,pat,1); 
+        memcpy(s+i,pat,1); 
         *pat = rotr(*pat);
 
     }      
