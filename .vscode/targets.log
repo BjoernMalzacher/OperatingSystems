@@ -1,4 +1,4 @@
-make all -f "/home/malzacher/OperatingSystems/U1/p1/Makefile" --print-data-base --no-builtin-variables --no-builtin-rules --question
+make all -f /home/malzacher/OperatingSystems/U1/p1/Makefile --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target 'main.o', needed by 'print'.  Stop.
  
 # GNU Make 4.2.1
@@ -8,7 +8,7 @@ make: *** No rule to make target 'main.o', needed by 'print'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed Nov 17 16:39:30 2021
+# Make data base, printed on Mon Dec 27 16:07:42 2021
 
 # Variables
 
@@ -43,7 +43,7 @@ SHELL = /bin/sh
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{}}
 # environment
-_ = /home/malzacher/.vscode-server/bin/3a6960b964327f0e3882ce18fcebd07ed191b316/node
+_ = /home/malzacher/.vscode-server/bin/899d46d82c4c95423fb7e10e68eba52050e30ba3/node
 # makefile (from '/home/malzacher/OperatingSystems/U1/p1/Makefile', line 3)
 CFLAGS = -g -W -Wall -Werror -std=c99 -I$(testlib) -I.
 # makefile (from '/home/malzacher/OperatingSystems/U1/p1/Makefile', line 1)
@@ -63,7 +63,7 @@ VSCODE_CWD = /mnt/c/Users/malza/AppData/Local/Programs/Microsoft VS Code
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
-PATH = /home/malzacher/.vscode-server/bin/3a6960b964327f0e3882ce18fcebd07ed191b316/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files/Common Files/Oracle/Java/javapath:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Intel/WiFi/bin/:/mnt/c/Program Files/Common Files/Intel/WirelessCommon/:/mnt/c/Program Files/Git/cmd:/mnt/c/Users/malza/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/malza/AppData/Local/Programs/Microsoft VS Code/bin:/snap/bin
+PATH = /home/malzacher/.vscode-server/bin/899d46d82c4c95423fb7e10e68eba52050e30ba3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files/Common Files/Oracle/Java/javapath:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Intel/WiFi/bin/:/mnt/c/Program Files/Common Files/Intel/WirelessCommon/:/mnt/c/Program Files/Git/cmd:/mnt/c/Users/malza/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/malza/AppData/Local/Programs/Microsoft VS Code/bin:/snap/bin
 # environment
 XDG_RUNTIME_DIR = /mnt/wslg/runtime-dir
 # makefile (from '/home/malzacher/OperatingSystems/U1/p1/Makefile', line 7)
@@ -71,7 +71,7 @@ VPATH = $(testlib) tests
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-e84a7478-66a6-447c-8fa6-bac2c1daaa3c.sock
+VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-cc0f2c99-c32a-456c-80c0-7d5a64c29e12.sock
 # makefile (from '/home/malzacher/OperatingSystems/U1/p1/Makefile', line 4)
 LDFLAGS = 
 # default
@@ -89,7 +89,7 @@ PWD = /home/malzacher/OperatingSystems
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/2724_interop
+WSL_INTEROP = /run/WSL/37_interop
 # environment
 PULSE_SERVER = /mnt/wslg/PulseServer
 # environment
@@ -127,7 +127,7 @@ NAME = LAPTOP-MALZACHER
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
-VSCODE_WSL_EXT_LOCATION = /mnt/c/Users/malza/.vscode/extensions/ms-vscode-remote.remote-wsl-0.58.5
+VSCODE_WSL_EXT_LOCATION = /mnt/c/Users/malza/.vscode/extensions/ms-vscode-remote.remote-wsl-0.63.13
 # default
 MAKE_COMMAND := make
 # default
@@ -169,7 +169,7 @@ WAYLAND_DISPLAY = wayland-0
 # default
 .INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
 # environment
-VSCODE_INJECT_NODE_MODULE_LOOKUP_PATH = /home/malzacher/.vscode-server/bin/3a6960b964327f0e3882ce18fcebd07ed191b316/remote/node_modules
+VSCODE_INJECT_NODE_MODULE_LOOKUP_PATH = /home/malzacher/.vscode-server/bin/899d46d82c4c95423fb7e10e68eba52050e30ba3/remote/node_modules
 # default
 .RECIPEPREFIX := 
 # environment
@@ -189,11 +189,11 @@ WSL_DISTRO_NAME = Ubuntu
 
 # Directories
 
-# . (device 2080, inode 46319): 8 files, 1 impossibilities.
+# . (device 2080, inode 46319): 12 files, 1 impossibilities.
 # ../testlib: could not be stat'd.
 # tests: could not be stat'd.
 
-# 8 files, 1 impossibilities in 3 directories.
+# 12 files, 1 impossibilities in 3 directories.
 
 # Implicit Rules
 
@@ -277,8 +277,8 @@ print-sol: main.o print-solution.o testlib.o
 
 # makefile (from '/home/malzacher/OperatingSystems/U1/p1/Makefile', line 25)
 test_formatstring-sol: LDFLAGS += -Wl,--wrap=printf
- 
 # Not a target:
+ 
 test_formatstring-sol:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -328,12 +328,12 @@ main.o:
 # General ('VPATH' variable) search path:
 # ../testlib:tests
 
-# strcache buffers: 1 (0) / strings = 33 / storage = 316 B / avg = 9 B
-# current buf: size = 8162 B / used = 316 B / count = 33 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 37 / storage = 342 B / avg = 9 B
+# current buf: size = 8162 B / used = 342 B / count = 37 / avg = 9 B
 
-# strcache performance: lookups = 61 / hit rate = 45%
+# strcache performance: lookups = 65 / hit rate = 43%
 # hash-table stats:
-# Load=33/8192=0%, Rehash=0, Collisions=1/61=2%
-# Finished Make data base on Wed Nov 17 16:39:30 2021
+# Load=37/8192=0%, Rehash=0, Collisions=1/65=2%
+# Finished Make data base on Mon Dec 27 16:07:42 2021
 
  

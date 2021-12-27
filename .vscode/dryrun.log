@@ -1,4 +1,4 @@
-make -f "/home/malzacher/OperatingSystems/U1/p1/Makefile" --dry-run --always-make --keep-going --print-directory
+make -f /home/malzacher/OperatingSystems/U1/p1/Makefile --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/malzacher/OperatingSystems'
 make: Leaving directory '/home/malzacher/OperatingSystems'
  

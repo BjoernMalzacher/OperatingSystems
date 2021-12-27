@@ -16,7 +16,8 @@
             "compilerPath": "D:/Programieren/Visual Studio/Visual Studio IDE/VC/Tools/MSVC/14.29.30037/bin/Hostx64/x86/cl.exe",
             "cStandard": "c17",
             "cppStandard": "c++17",
-            "intelliSenseMode": "windows-msvc-x64"
+            "intelliSenseMode": "windows-msvc-x64",
+            "configurationProvider": "ms-vscode.makefile-tools"
         }
     ],
     "version": 4
