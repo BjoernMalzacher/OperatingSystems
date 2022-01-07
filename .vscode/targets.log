@@ -1,6 +1,4 @@
 make all -f /home/malzacher/OperatingSystems/U1/p1/Makefile --print-data-base --no-builtin-variables --no-builtin-rules --question
-make: *** No rule to make target 'main.o', needed by 'print'.  Stop.
- 
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ make: *** No rule to make target 'main.o', needed by 'print'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Dec 27 16:07:42 2021
+# Make data base, printed on Fri Jan  7 11:48:46 2022
 
 # Variables
 
@@ -71,7 +69,7 @@ VPATH = $(testlib) tests
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-cc0f2c99-c32a-456c-80c0-7d5a64c29e12.sock
+VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-db925680-72ce-4b61-95fb-8f3a09ee28f1.sock
 # makefile (from '/home/malzacher/OperatingSystems/U1/p1/Makefile', line 4)
 LDFLAGS = 
 # default
@@ -89,7 +87,7 @@ PWD = /home/malzacher/OperatingSystems
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/37_interop
+WSL_INTEROP = /run/WSL/11_interop
 # environment
 PULSE_SERVER = /mnt/wslg/PulseServer
 # environment
@@ -180,8 +178,10 @@ TERM = xterm-256color
 VSCODE_EXTHOST_WILL_SEND_SOCKET = true
 # environment
 WSL_DISTRO_NAME = Ubuntu
+# environment
+MOTD_SHOWN = update-motd
 # variable set hash-table stats:
-# Load=84/1024=8%, Rehash=0, Collisions=11/134=8%
+# Load=85/1024=8%, Rehash=0, Collisions=11/135=8%
 
 # Pattern-specific Variable Values
 
@@ -189,11 +189,11 @@ WSL_DISTRO_NAME = Ubuntu
 
 # Directories
 
-# . (device 2080, inode 46319): 12 files, 1 impossibilities.
+# . (device 2080, inode 46319): 13 files, 1 impossibilities.
 # ../testlib: could not be stat'd.
 # tests: could not be stat'd.
 
-# 12 files, 1 impossibilities in 3 directories.
+# 13 files, 1 impossibilities in 3 directories.
 
 # Implicit Rules
 
@@ -278,7 +278,6 @@ print-sol: main.o print-solution.o testlib.o
 # makefile (from '/home/malzacher/OperatingSystems/U1/p1/Makefile', line 25)
 test_formatstring-sol: LDFLAGS += -Wl,--wrap=printf
 # Not a target:
- 
 test_formatstring-sol:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -328,12 +327,14 @@ main.o:
 # General ('VPATH' variable) search path:
 # ../testlib:tests
 
-# strcache buffers: 1 (0) / strings = 37 / storage = 342 B / avg = 9 B
-# current buf: size = 8162 B / used = 342 B / count = 37 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 38 / storage = 345 B / avg = 9 B
+# current buf: size = 8162 B / used = 345 B / count = 38 / avg = 9 B
 
-# strcache performance: lookups = 65 / hit rate = 43%
+# strcache performance: lookups = 66 / hit rate = 42%
 # hash-table stats:
-# Load=37/8192=0%, Rehash=0, Collisions=1/65=2%
-# Finished Make data base on Mon Dec 27 16:07:42 2021
+# Load=38/8192=0%, Rehash=0, Collisions=1/66=2%
+# Finished Make data base on Fri Jan  7 11:48:47 2022
 
+ 
+make: *** No rule to make target 'main.o', needed by 'print'.  Stop.
  
