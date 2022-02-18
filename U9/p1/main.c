@@ -35,6 +35,7 @@ int main() {
     parallelStringSearch("hello", text, strlen(text), 1);
 
     int fd = open("/usr/share/dict/words", O_RDONLY);
+    
     if (fd != -1) {
         struct stat s;
         fstat(fd, &s);
@@ -43,7 +44,7 @@ int main() {
 
         printf("searching for 'system' in /usr/share/dict/words:\n");
         parallelStringSearch("system", words, len, 4);
-
+    
         munmap(words, len);
         close(fd);
     }

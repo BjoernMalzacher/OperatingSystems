@@ -10,8 +10,22 @@
  */
 ssize_t findFirstSubstring(const char *needle, const char *haystack, size_t len)
 {
-    (void) needle; (void) haystack; (void) len;
-    /* TODO */
+    size_t count =0;
+    if(len < strlen(needle))
+        return-1;
+    for (size_t i = 0; i < len; i++)
+    {
+        count =0;
+        while (*(needle+count) == *(haystack+count+i)) {
+            count +=1;
+            if( strlen(needle) <= count)
+                return i;
+            if(count+i >= len)
+                return -1;
+        }
+        
+        
+    }
     return -1;
 }
 
@@ -45,9 +59,18 @@ void appendLine(Lines **lines, Line l)
 Lines *findLines(const char *haystack, size_t len)
 {
     Lines *lines = newLines();
-
-    /* TODO: find all lines and append them with appendLine() */
-    (void) haystack; (void) len;
+    Line newLine;
+    int last_Start = 0;
+    for (size_t i = 0; i < len; i++) {
+        if(*(haystack+i) == '\n') {
+            newLine.start = haystack+last_Start;
+            newLine.len = i;
+            last_Start +=i+1;
+            appendLine(&lines, newLine); 
+        }
+        
+    }
+    
 
     return lines;
 }
@@ -57,8 +80,18 @@ Lines *findLines(const char *haystack, size_t len)
  */
 Line *findLineContaining(Lines *l, const char *match)
 {
-    (void) l; (void) match;
-    /* TODO: Use binary search to find the line that contains `match`. */
+   size_t lower = 0, upper = l->len;
+    size_t middle;
+    while (lower <= upper) {
+        middle = (upper + lower) / 2;
+        if (match >= l->lines[middle].start && match < l->lines[middle].start + l->lines[middle].len) {
+            return &l->lines[middle];
+        } else if (match < l->lines[middle].start) {
+            upper = middle - 1;
+        } else {
+            lower = middle + 1;
+        }
+    }
     return NULL;
 }
 
@@ -83,8 +116,48 @@ void *lineSearcher(void *arg)
  */
 void *needleSearcher(void *arg)
 {
+    
     NeedleSearcherState *state = arg;
-    NeedleSearcherResult *results = NULL;
+    NeedleSearcherResult *results = malloc(sizeof(NeedleSearcherResult));
+    NeedleSearcherResult *start_Res = results; 
+    NeedleSearcherResult *last_res = NULL;
+    int needle_len = strlen(state->needle);
+    int offset =0;
+    int start = 0;
+    
+  while(offset >=0) {
+
+        offset = findFirstSubstring(state->needle,state->haystack+start,state->len-start);
+        
+        if(offset != -1){
+            results->match = state->haystack + start+offset;
+            
+            results->next = malloc(sizeof(NeedleSearcherResult));
+            
+            last_res = results;
+            
+            results = results->next; 
+            
+             
+        }else{
+            
+            last_res->next = NULL;
+        
+            break;
+        }
+        
+        start +=(needle_len+offset);
+        
+    }
+    
+    results = start_Res;
+    
+    
+         
+     
+     
+
+
 
     /* TODO: Find all substrings by calling findFirstSubstring() and collect
      * them in a linked list with NeedleSearcherResult. */
@@ -99,6 +172,12 @@ void *needleSearcher(void *arg)
     pthread_mutex_unlock(state->mutex);
 
     /* TODO: Add line information to the results by calling findLineContaining(). */
+        while (results != NULL)
+    {
+        results->line = findLineContaining(*(state->lines),results->match);
+        results = results->next;
+    }
+    results = start_Res;
 
     return results;
 }
