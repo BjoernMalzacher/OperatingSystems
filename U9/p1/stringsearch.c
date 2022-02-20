@@ -10,8 +10,22 @@
  */
 ssize_t findFirstSubstring(const char *needle, const char *haystack, size_t len)
 {
-    (void) needle; (void) haystack; (void) len;
-    /* TODO */
+    int lastDiff = 0;
+    size_t eq =0;
+    for (size_t i = 0; i <= len; i++) {
+        if(*(needle+eq) == '\0' ||eq >= strlen(needle) ){
+            return lastDiff;
+        }
+        if(*(haystack+i) == *(needle+eq)){
+            eq +=1;
+
+        }else{
+            lastDiff = i+1;
+            eq = 0;
+        }
+        
+    }
+    
     return -1;
 }
 
@@ -46,8 +60,21 @@ Lines *findLines(const char *haystack, size_t len)
 {
     Lines *lines = newLines();
 
-    /* TODO: find all lines and append them with appendLine() */
-    (void) haystack; (void) len;
+
+    size_t startOfLine = 0;
+    int endOfLine = findFirstSubstring("\n",haystack+startOfLine,len);
+      
+
+    while (*(haystack+startOfLine) !='\0') { 
+        Line l;
+        Lines** linespointer = &lines; 
+        endOfLine = findFirstSubstring("\n",haystack+startOfLine,len);
+        l.start = haystack+startOfLine;
+        l.len = endOfLine-startOfLine;
+        appendLine(linespointer,l);
+        startOfLine += endOfLine+1;
+        
+    }    
 
     return lines;
 }
@@ -57,9 +84,42 @@ Lines *findLines(const char *haystack, size_t len)
  */
 Line *findLineContaining(Lines *l, const char *match)
 {
-    (void) l; (void) match;
-    /* TODO: Use binary search to find the line that contains `match`. */
-    return NULL;
+
+    for (size_t i = 0; i < l->len; i++)
+    {
+            printf("%s:::%li\n", l->lines[i].start, i);
+
+    }
+    
+    size_t index =(l->len)/2;
+    size_t eq =0;
+    printf("%li\n",l->len);
+    while(0){
+          printf("%c:::%li \n",*(l->lines[index].start+eq), eq);
+        if(*(l->lines[index].start+eq) == *(match+eq)) {
+        printf("%c:::%c \n",*(l->lines[index].start+eq), *(match+eq));
+            
+            eq +=1;
+
+        }else if(*(l->lines[index].start+eq) < *(match+eq)) {
+            printf("<%li\n", index);
+
+            index = index/2;
+            eq = 0;
+                       
+        }else if (*(l->lines[index].start+eq) > *(match+eq)) {
+            printf(">%li\n", index);
+            index = (index/2)+index; 
+            eq = 0;   
+        }
+        if(eq >=l->lines[index].len){
+            return &(l->lines[index]);
+        }
+        
+        
+    }
+   
+    return &(l->lines[index]);
 }
 
 typedef struct _LineSearcherState {
