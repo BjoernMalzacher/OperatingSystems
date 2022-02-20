@@ -148,16 +148,15 @@ void* _workerMain(void *arg)
  */
 static int _startWorkers(uint32_t num)
 {
-   if((num+numberOfActiveThreads) <= processor_Count){
+   
         for (size_t i = 0; i < num; i++) {
-            pthread_create(&workerpool[i],NULL, _workerMain,(ptrdiff_t) i); 
-            _dequeue(&_workItems[_nextJob]);
-            numberOfActiveThreads+=num;
-
+            if ( pthread_create(&workerpool[i],NULL, _workerMain,(ptrdiff_t) i) != 0){
+                return -1;
+            } 
+   
         }
-    }else{
-        return -1;
-    }
+        numberOfActiveThreads = num;
+   
 
     return 0;
 }
@@ -168,14 +167,13 @@ static int _startWorkers(uint32_t num)
  */
 static void _waitForWorkers(void)
 {   
-    for (long i = 0; i < processor_Count; i++)
-    {
-        
-        pthread_join(*(workerpool+i), NULL);
+    for (long i = 0; i < numberOfActiveThreads; i++)
+    {        
+        if(pthread_join(*(workerpool+i), NULL) == 0){
+        }
       
     }
-    
-   
+
     
     
 }
@@ -188,7 +186,6 @@ int initializeWorkerPool(void)
 {
      
     assert(_done);
-
     // The main thread should not be part of the worker pool and thus does not
     // get a valid id.
     _workerId = -1;
@@ -206,7 +203,9 @@ int initializeWorkerPool(void)
   
    
    processor_Count = sysconf(_SC_NPROCESSORS_ONLN);
-  
+    if(processor_Count == -1 ){
+        return -1;
+    }
     if(processor_Count < 4){
       
          pthread_t *t = ( pthread_t)malloc(sizeof(pthread_t)*4);

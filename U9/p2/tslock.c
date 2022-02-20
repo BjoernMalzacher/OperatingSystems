@@ -3,11 +3,13 @@
 
 void tslock_init(TicketSpinlock *tslock)
 {
-    (void) tslock;
+    tslock->currentTicket = 0;
+    tslock->ticketCounter = 0;
 }
 
 void tslock_lock(TicketSpinlock *tslock)
 {
+    __asm__ volatile 
     (void) tslock;
 }
 
