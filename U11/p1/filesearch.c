@@ -13,9 +13,15 @@
  */
 FILE *openAtOffset(const char *filename, long offset)
 {
-    // TODO
-    (void) filename; (void) offset;
-    return NULL;
+    if(strlen(filename)== 0 || offset <0)
+        return NULL;
+    FILE* file = fopen(filename,"r");
+    if(file == NULL)
+        return NULL;
+    if(fseek(file,offset, SEEK_SET) != 0)
+        return NULL;
+    
+    return file;
 }
 
 /*
@@ -24,8 +30,11 @@ FILE *openAtOffset(const char *filename, long offset)
  */
 char *allocateAndRead(FILE *file, size_t len)
 {
-    // TODO
-    (void) file; (void) len;
+    if(file == NULL|| len<= 0 )
+        return NULL;
+    char* buff = malloc(sizeof(char)*len);
+    if(fread(buff,1,len,file) == len)
+        return buff;
     return NULL;
 }
 
@@ -34,9 +43,15 @@ char *allocateAndRead(FILE *file, size_t len)
  */
 int64_t getFileSize(const char *filename)
 {
-    // TODO
-    (void) filename;
-    return -1;
+    if(filename == NULL)
+        return -1;
+    struct stat* buff = malloc(sizeof(struct stat)); 
+    if(stat(filename,buff) !=0 )
+        return -1;
+    
+    int64_t size = (int64_t)buff->st_size;
+    free(buff);   
+    return size;
 }
 
 /*
@@ -51,7 +66,7 @@ ssize_t findFirstSubstring(const char *needle, const char *haystack, size_t len)
         return -1;
     for (i = 0; i <= len - needle_len; i++) {
         for (j = 0; needle[j]; j++) {
-            if (needle[j] != haystack[i + j])
+                if (needle[j] != haystack[i + j])
                 break;
         }
         // We found a match if we walked to the end of needle.
