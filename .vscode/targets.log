@@ -6,7 +6,7 @@ make all -f /home/malzacher/OperatingSystems/U1/p1/Makefile --print-data-base --
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Feb 18 11:27:17 2022
+# Make data base, printed on Mon Feb 21 10:57:51 2022
 
 # Variables
 
@@ -15,13 +15,11 @@ make all -f /home/malzacher/OperatingSystems/U1/p1/Makefile --print-data-base --
 # automatic
 ?F = $(notdir $?)
 # environment
-WSLENV = VSCODE_WSL_EXT_LOCATION/up:VSCODE_SERVER_TAR/up
+WSLENV = VSCODE_WSL_EXT_LOCATION/up
 # default
 .SHELLFLAGS := -c
 # makefile (from '/home/malzacher/OperatingSystems/U1/p1/Makefile', line 10)
 OBJ = $(SRC:.c=.o)
-# environment
-VSCODE_AGENT_FOLDER = /home/malzacher/.vscode-server
 # makefile (from '/home/malzacher/OperatingSystems/U1/p1/Makefile', line 6)
 SRC = print.c testlib.c
 # environment
@@ -41,7 +39,7 @@ SHELL = /bin/sh
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{}}
 # environment
-_ = /home/malzacher/.vscode-server/bin/5554b12acf27056905806867f251c859323ff7e9/node
+_ = /home/malzacher/.vscode-server/bin/f80445acd5a3dadef24aa209168452a3d97cc326/node
 # makefile (from '/home/malzacher/OperatingSystems/U1/p1/Makefile', line 3)
 CFLAGS = -g -W -Wall -Werror -std=c99 -I$(testlib) -I.
 # makefile (from '/home/malzacher/OperatingSystems/U1/p1/Makefile', line 1)
@@ -61,7 +59,7 @@ VSCODE_CWD = /mnt/c/Users/malza/AppData/Local/Programs/Microsoft VS Code
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
-PATH = /home/malzacher/.vscode-server/bin/5554b12acf27056905806867f251c859323ff7e9/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files/Common Files/Oracle/Java/javapath:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Intel/WiFi/bin/:/mnt/c/Program Files/Common Files/Intel/WirelessCommon/:/mnt/c/Program Files/Git/cmd:/mnt/c/Users/malza/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/malza/AppData/Local/Programs/Microsoft VS Code/bin:/snap/bin
+PATH = /home/malzacher/.vscode-server/bin/f80445acd5a3dadef24aa209168452a3d97cc326/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files/Common Files/Oracle/Java/javapath:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Intel/WiFi/bin/:/mnt/c/Program Files/Common Files/Intel/WirelessCommon/:/mnt/c/Program Files/Git/cmd:/mnt/c/Users/malza/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/malza/AppData/Local/Programs/Microsoft VS Code/bin:/snap/bin
 # environment
 XDG_RUNTIME_DIR = /mnt/wslg/runtime-dir
 # makefile (from '/home/malzacher/OperatingSystems/U1/p1/Makefile', line 7)
@@ -69,11 +67,9 @@ VPATH = $(testlib) tests
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-b26f8572-3ea8-4432-b78c-588fcd9d556d.sock
+VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-d55a0cfe-76a6-4d04-b674-1eb7d1f9df3c.sock
 # makefile (from '/home/malzacher/OperatingSystems/U1/p1/Makefile', line 4)
 LDFLAGS = 
-# environment
-VSCODE_SERVER_TAR = /mnt/c/Users/malza/AppData/Local/Temp/vscode-remote-wsl/5554b12acf27056905806867f251c859323ff7e9/vscode-server-stable-linux-x64.tar.gz
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -89,7 +85,7 @@ PWD = /home/malzacher/OperatingSystems
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/12_interop
+WSL_INTEROP = /run/WSL/11_interop
 # environment
 PULSE_SERVER = /mnt/wslg/PulseServer
 # environment
@@ -127,7 +123,7 @@ NAME = LAPTOP-MALZACHER
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
-VSCODE_WSL_EXT_LOCATION = /mnt/c/Users/malza/.vscode/extensions/ms-vscode-remote.remote-wsl-0.63.13
+VSCODE_WSL_EXT_LOCATION = /mnt/c/Users/malza/.vscode/extensions/ms-vscode-remote.remote-wsl-0.64.2
 # default
 MAKE_COMMAND := make
 # default
@@ -181,7 +177,7 @@ WSL_DISTRO_NAME = Ubuntu
 # environment
 MOTD_SHOWN = update-motd
 # variable set hash-table stats:
-# Load=85/1024=8%, Rehash=0, Collisions=11/135=8%
+# Load=83/1024=8%, Rehash=0, Collisions=11/133=8%
 
 # Pattern-specific Variable Values
 
@@ -189,11 +185,11 @@ MOTD_SHOWN = update-motd
 
 # Directories
 
-# . (device 2080, inode 46319): 13 files, 1 impossibilities.
+# . (device 2080, inode 46319): 16 files, 1 impossibilities.
 # ../testlib: could not be stat'd.
 # tests: could not be stat'd.
 
-# 13 files, 1 impossibilities in 3 directories.
+# 16 files, 1 impossibilities in 3 directories.
 
 # Implicit Rules
 
@@ -275,14 +271,14 @@ print-sol: main.o print-solution.o testlib.o
 #  recipe to execute (from '/home/malzacher/OperatingSystems/U1/p1/Makefile', line 34):
 	$(CC) -o $@ $^ $(LDFLAGS)
 
- 
-make: *** No rule to make target 'main.o', needed by 'print'.  Stop.
- 
 # makefile (from '/home/malzacher/OperatingSystems/U1/p1/Makefile', line 25)
 test_formatstring-sol: LDFLAGS += -Wl,--wrap=printf
 # Not a target:
 test_formatstring-sol:
 #  Implicit rule search has not been done.
+ 
+make: *** No rule to make target 'main.o', needed by 'print'.  Stop.
+ 
 #  Modification time never checked.
 #  File has not been updated.
 # variable set hash-table stats:
@@ -330,12 +326,12 @@ main.o:
 # General ('VPATH' variable) search path:
 # ../testlib:tests
 
-# strcache buffers: 1 (0) / strings = 38 / storage = 345 B / avg = 9 B
-# current buf: size = 8162 B / used = 345 B / count = 38 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 41 / storage = 363 B / avg = 8 B
+# current buf: size = 8162 B / used = 363 B / count = 41 / avg = 8 B
 
-# strcache performance: lookups = 66 / hit rate = 42%
+# strcache performance: lookups = 69 / hit rate = 40%
 # hash-table stats:
-# Load=38/8192=0%, Rehash=0, Collisions=1/66=2%
-# Finished Make data base on Fri Feb 18 11:27:17 2022
+# Load=41/8192=1%, Rehash=0, Collisions=1/69=1%
+# Finished Make data base on Mon Feb 21 10:57:51 2022
 
  
