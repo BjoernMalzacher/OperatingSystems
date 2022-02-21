@@ -10,6 +10,24 @@
  */
 ssize_t findFirstSubstring(const char *needle, const char *haystack, size_t len)
 {
+<<<<<<< HEAD
+    int lastDiff = 0;
+    size_t eq =0;
+    for (size_t i = 0; i <= len; i++) {
+        if(*(needle+eq) == '\0' ||eq >= strlen(needle) ){
+            return lastDiff;
+        }
+        if(*(haystack+i) == *(needle+eq)){
+            eq +=1;
+
+        }else{
+            lastDiff = i+1;
+            eq = 0;
+        }
+        
+    }
+    
+=======
     size_t count =0;
     if(len < strlen(needle))
         return-1;
@@ -26,6 +44,7 @@ ssize_t findFirstSubstring(const char *needle, const char *haystack, size_t len)
         
         
     }
+>>>>>>> 5d97185cefc01a1d79aa27450ffc5e025b729f2e
     return -1;
 }
 
@@ -59,6 +78,24 @@ void appendLine(Lines **lines, Line l)
 Lines *findLines(const char *haystack, size_t len)
 {
     Lines *lines = newLines();
+<<<<<<< HEAD
+
+
+    size_t startOfLine = 0;
+    int endOfLine = findFirstSubstring("\n",haystack+startOfLine,len);
+      
+
+    while (*(haystack+startOfLine) !='\0') { 
+        Line l;
+        Lines** linespointer = &lines; 
+        endOfLine = findFirstSubstring("\n",haystack+startOfLine,len);
+        l.start = haystack+startOfLine;
+        l.len = endOfLine-startOfLine;
+        appendLine(linespointer,l);
+        startOfLine += endOfLine+1;
+        
+    }    
+=======
     Line newLine;
     int last_Start = 0;
     for (size_t i = 0; i < len; i++) {
@@ -71,6 +108,7 @@ Lines *findLines(const char *haystack, size_t len)
         
     }
     
+>>>>>>> 5d97185cefc01a1d79aa27450ffc5e025b729f2e
 
     return lines;
 }
@@ -80,6 +118,44 @@ Lines *findLines(const char *haystack, size_t len)
  */
 Line *findLineContaining(Lines *l, const char *match)
 {
+<<<<<<< HEAD
+
+    for (size_t i = 0; i < l->len; i++)
+    {
+            printf("%s:::%li\n", l->lines[i].start, i);
+
+    }
+    
+    size_t index =(l->len)/2;
+    size_t eq =0;
+    printf("%li\n",l->len);
+    while(0){
+          printf("%c:::%li \n",*(l->lines[index].start+eq), eq);
+        if(*(l->lines[index].start+eq) == *(match+eq)) {
+        printf("%c:::%c \n",*(l->lines[index].start+eq), *(match+eq));
+            
+            eq +=1;
+
+        }else if(*(l->lines[index].start+eq) < *(match+eq)) {
+            printf("<%li\n", index);
+
+            index = index/2;
+            eq = 0;
+                       
+        }else if (*(l->lines[index].start+eq) > *(match+eq)) {
+            printf(">%li\n", index);
+            index = (index/2)+index; 
+            eq = 0;   
+        }
+        if(eq >=l->lines[index].len){
+            return &(l->lines[index]);
+        }
+        
+        
+    }
+   
+    return &(l->lines[index]);
+=======
    size_t lower = 0, upper = l->len;
     size_t middle;
     while (lower <= upper) {
@@ -93,6 +169,7 @@ Line *findLineContaining(Lines *l, const char *match)
         }
     }
     return NULL;
+>>>>>>> 5d97185cefc01a1d79aa27450ffc5e025b729f2e
 }
 
 typedef struct _LineSearcherState {
