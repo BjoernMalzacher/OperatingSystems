@@ -11,6 +11,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <errno.h>
 
 pthread_mutex_t lock;
 unsigned long long total; /* sum of file sizes */
@@ -108,7 +109,6 @@ void tableInsert(ino_t inode) {
  * Note: Not reentrant or thread-safe, as all data is in global variables!
  */
 unsigned long long getFilesystemSize(char *path) {
-    (void) path;
 
     total = 0;
     stack_working = 0;
@@ -119,13 +119,33 @@ unsigned long long getFilesystemSize(char *path) {
     sem_init(&stack_fill, 0, 0);
 
     /* TODO: initialize remaining global variables */
-
+    pthread_mutex_init(&lock,NULL);
+ 
+    
+    
     /* TODO: start scanning the directory */
+    addDirectory(path);
 
     /* TODO: spawn the threads, then wait for completion */
+   pthread_t* thread_buff = malloc(sizeof(pthread_t)*NUM_THREADS);
+    for (size_t i = 0; i < NUM_THREADS; i++)
+    {
+
+        if(pthread_create(thread_buff+i,NULL,doWork,NULL)<0){
+
+        }
+            
+    }
+    for (size_t i = 0; i < NUM_THREADS; i++)
+    {
+        if(pthread_join(*(thread_buff+i),NULL)<0){
+
+        }
+    }
+    
 
     /* TODO: free remaining resources */
-
+    pthread_mutex_destroy(&lock);
     sem_destroy(&stack_fill);
     hdestroy();
 
@@ -134,29 +154,57 @@ unsigned long long getFilesystemSize(char *path) {
 
 /* Read the given directory and process its files and directories. */
 void listDir(const char *dirpath) {
-    /* TODO */
-    (void) dirpath;
+    
+    DIR* dir = opendir(dirpath);
+    
+    if(dir == NULL)
+        exit(-1);
+    struct dirent* d = malloc(sizeof(struct dirent));
+    do {
+        d = readdir(dir);
+        if(d == NULL && errno == EBADF )
+            exit(-1);
+        if(d ==NULL ){
+            continue;
+        }
+        processEntry(dirpath,d);
+    }while (d != NULL );
+    free(d);
+    closedir(dir);
 }
 
 /* Calls the appropriate processing function for files and directories. */
 void processEntry(const char *dirpath, struct dirent *entry) {
-    /* TODO: check entry->d_type */
-    (void) dirpath;
-    (void) entry;
+    if(entry->d_name[0] == '.')
+        return;
+    if(entry->d_type == 4)
+        addDirectory(makePath(dirpath,entry->d_name));
+    if(entry->d_type == 8)
+        processFile(makePath(dirpath,entry->d_name));
+   
 }
 
 /* Process a file, reading its size. */
 void processFile(const char *path) {
-    /* TODO */
-    (void) path;
+    struct stat* buff = malloc(sizeof(struct stat));
+    if (stat(path,buff)<0)
+        return;
+    pthread_mutex_lock(&lock);
+    if(!tableContains(buff->st_ino)){
+        
+        tableInsert(buff->st_ino);
+        total +=buff->st_size;
+    }
+    pthread_mutex_unlock(&lock);
 }
 
 /* Join a directory path and a filename to a newly-allocated string. */
 char *makePath(const char *dirpath, const char *name) {
-    /* TODO */
-    (void) dirpath;
-    (void) name;
-    return NULL;
+    char* ret = malloc(strlen(dirpath)+1+strlen(name)+1);
+    strcpy(ret,dirpath);
+    strcat(ret,"/");
+    strcat(ret,name);
+    return ret;
 }
 
 

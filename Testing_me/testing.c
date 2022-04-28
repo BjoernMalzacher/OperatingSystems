@@ -19,6 +19,7 @@ int mutlti_threading(test *t){
     for (size_t i = 0; i < 4; i++)
     {        
         pthread_t* n = malloc(sizeof(*n));
+        
     pthread_create(n,NULL,exe,t);
 
     }
